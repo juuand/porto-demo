@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full scroll-smooth dark">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <script src="https://kit.fontawesome.com/f4e831088d.js" crossorigin="anonymous"></script>
+  <title>Portfolio</title>
+
+  <style>
+    @font-face {
+      font-family: "MyFont";
+      src: url("./src/fonts/JetBrainsMono-Regular.ttf") format("truetype");
+      font-weight: normal;
+      font-style: normal;
+    }
+
+    .font-myfont {
+      font-family: "MyFont", sans-serif;
+    }
+
+    @keyframes morph-radius {
+      0% {
+        border-radius: 2rem;
+      }
+
+      25% {
+        border-radius: 50%;
+      }
+
+      50% {
+        border-radius: 2rem 0 2rem 0;
+      }
+
+      75% {
+        border-radius: 0 2rem 0 2rem;
+      }
+
+      100% {
+        border-radius: 2rem;
+      }
+    }
+
+    .animate-radius {
+      animation: morph-radius 3s ease-in-out infinite;
+    }
+
+    @keyframes floatUpDown {
+
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-8px);
+      }
+    }
+
+    .animate-float {
+      animation: floatUpDown 3s ease-in-out infinite;
+    }
+
+    .animate-float.delay-100 {
+      animation-delay: 0.2s;
+    }
+
+    .animate-float.delay-200 {
+      animation-delay: 0.4s;
+    }
+
+    @keyframes heartbeat {
+
+      0%,
+      100% {
+        transform: scale(1);
+      }
+
+      14% {
+        transform: scale(1.3);
+      }
+
+      28% {
+        transform: scale(1);
+      }
+
+      42% {
+        transform: scale(1.3);
+      }
+
+      70% {
+        transform: scale(1);
+      }
+    }
+
+    .animate-heartbeat {
+      animation: heartbeat 2s infinite;
+    }
+
+    .animate-heartbeat.delay-100 {
+      animation-delay: 0.1s;
+    }
+
+    .animate-heartbeat.delay-200 {
+      animation-delay: 0.2s;
+    }
+
+    .animate-heartbeat.delay-300 {
+      animation-delay: 0.3s;
+    }
+
+    .animate-heartbeat.delay-400 {
+      animation-delay: 0.4s;
+    }
+
+    .animate-heartbeat.delay-500 {
+      animation-delay: 0.5s;
+    }
+
+    .animate-heartbeat.delay-600 {
+      animation-delay: 0.6s;
+    }
+
+    @keyframes shake-mood {
+      0% {
+        transform: translate(0);
+      }
+
+      10% {
+        transform: translate(-2px, 1px);
+      }
+
+      20% {
+        transform: translate(2px, -1px);
+      }
+
+      30% {
+        transform: translate(-4px, 2px);
+      }
+
+      40% {
+        transform: translate(4px, -2px);
+      }
+
+      50% {
+        transform: translate(-6px, 3px);
+      }
+
+      60% {
+        transform: translate(6px, -3px);
+      }
+
+      70% {
+        transform: translate(-4px, 2px);
+      }
+
+      80% {
+        transform: translate(4px, -2px);
+      }
+
+      90% {
+        transform: translate(-2px, 1px);
+      }
+
+      100% {
+        transform: translate(0);
+      }
+    }
+
+    .animate-shake-mood {
+      animation: shake-mood 3s ease-in-out infinite;
+    }
+
+    @keyframes bounce {
+
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-8px);
+      }
+    }
+
+    .animate-bounce-delay {
+      display: inline-block;
+      animation: bounce 1s ease-in-out infinite;
+    }
+
+    .delay-0 {
+      animation-delay: 0s;
+    }
+
+    .delay-1 {
+      animation-delay: 0.1s;
+    }
+
+    .delay-2 {
+      animation-delay: 0.2s;
+    }
+
+    .delay-3 {
+      animation-delay: 0.3s;
+    }
+
+    .delay-4 {
+      animation-delay: 0.4s;
+    }
+
+    .delay-5 {
+      animation-delay: 0.5s;
+    }
+
+    .delay-6 {
+      animation-delay: 0.6s;
+    }
+  </style>
+</head>
+
+<body class="h-full bg-gray-900 text-white font-myfont">
+  <!-- Tombol Toggle Sidebar Mobile -->
+  <div class="lg:hidden fixed top-4 left-4 z-20">
+    <button onclick="document.getElementById('sidebar').classList.toggle('hidden')" class="text-white">
+      <i class="fa-solid fa-bars text-2xl"></i>
+    </button>
+  </div>
+
+  <div class="flex h-screen overflow-hidden">
+    <!-- Sidebar -->
+    <aside id="sidebar"
+      class="w-64 bg-gray-800 fixed top-0 bottom-0 left-0 z-10 flex-col hidden lg:flex transition-all duration-300 ease-in-out">
+      <div class="h-20 flex items-center justify-center gap-3 border-b border-gray-700 px-4">
+        <img src="./src/asset/profile.png" alt="Logo" class="h-14 w-14 object-cover rounded-full" />
+        <span class="text-sm font-semibold text-white">Kifly Juand Pratama Purba</span>
+      </div>
+
+      <nav class="p-4 text-[15px] space-y-8 overflow-y-auto flex-1 font-normal">
+        <a href="#home" class="block py-3 px-4 hover:bg-gray-700 rounded flex items-center gap-2">
+          <i class="fa-solid fa-house"></i> Beranda
+        </a>
+        <a href="#tentang" class="block py-3 px-4 hover:bg-gray-700 rounded flex items-center gap-2">
+          <i class="fa-solid fa-address-card"></i> Tentang
+        </a>
+        <a href="#projects" class="block py-3 px-4 hover:bg-gray-700 rounded flex items-center gap-2">
+          <i class="fa-solid fa-diagram-project"></i> Projects
+        </a>
+        <a href="#keahlian" class="block py-3 px-4 hover:bg-gray-700 rounded flex items-center gap-2">
+          <i class="fa-solid fa-lines-leaning"></i> Keahlian
+        </a>
+        <a href="#kontak" class="block py-3 px-4 hover:bg-gray-700 rounded flex items-center gap-2">
+          <i class="fa-solid fa-address-book"></i> Kontak
+        </a>
+      </nav>
+    </aside>
+
+    <!-- Konten Utama -->
+    <main class="lg:ml-64 flex-1 h-full overflow-y-auto px-4">
+      <!-- Section: Beranda -->
+      <section id="home"
+        class="relative min-h-screen flex items-center justify-center p-6 scroll-mt-20 overflow-hidden">
+        <div class="relative z-10 max-w-6xl w-full px-4 sm:px-6 flex flex-col lg:flex-row items-center gap-10">
+          <!-- Gambar -->
+          <div class="w-40 h-40 sm:w-56 sm:h-56 md:w-64 md:h-64 animate-radius overflow-hidden">
+            <img src="./src/asset/logo.gif" alt="Hero Image" class="w-full h-full object-cover shadow-lg" />
+          </div>
+
+          <!-- Konten -->
+          <div class="text-center lg:text-left">
+            <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4">
+              Bangun Ide Keren Lewat Coding
+            </h1>
+            <p class="text-gray-200 text-base sm:text-lg mb-6 max-w-xl">
+              Di sini saya membagikan hal-hal menarik seputar pengembangan
+              web, pembuatan bot, dan tools yang bisa meningkatkan
+              produktivitas developer.
+            </p>
+
+            <!-- Tombol -->
+            <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+              <a href="#tentang">
+                <button
+                  class="px-6 py-2 rounded-xl border-2 border-white text-white bg-transparent transition duration-300 hover:bg-white hover:text-gray-900">
+                  <i class="fa-solid fa-address-card mr-2"></i> Tentang Saya
+                </button>
+              </a>
+              <button
+                class="px-6 py-2 rounded-xl border-2 border-white text-white bg-transparent transition duration-300 hover:bg-white hover:text-gray-900">
+                <i class="fa-brands fa-discord mr-2"></i> Gabung Komunitas
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section lainnya -->
+      <section id="tentang" class="min-h-screen flex items-center justify-center p-6 scroll-mt-20">
+        <div class="max-w-6xl w-full flex flex-col-reverse lg:flex-row items-center gap-10">
+          <!-- Kiri: Teks -->
+          <div class="text-white lg:w-1/2 space-y-6">
+            <h3 class="text-2xl sm:text-3xl font-bold">Tentang Saya</h3>
+            <p class="text-gray-300 text-base sm:text-lg leading-relaxed">
+              Saya adalah seorang pengembang web dan bot yang senang membangun
+              solusi kreatif lewat baris-baris kode. Dengan semangat belajar
+              yang tinggi dan pengalaman di berbagai proyek, saya berfokus
+              pada efisiensi dan estetika dalam setiap website yang saya
+              buat. Fokus utama saya adalah memberikan pengalaman digital yang
+              menyenangkan serta fungsional, baik untuk pengguna biasa maupun
+              developer.
+            </p>
+
+            <button onclick="klik()"
+              class="flex items-center gap-2 px-5 py-2 border-2 border-white text-white rounded-xl bg-transparent hover:bg-white hover:text-gray-900 transition duration-300">
+              <i class="fa-brands fa-flickr"></i>
+              Klik Me
+            </button>
+          </div>
+
+          <!-- Kanan: Gambar atau GIF -->
+          <div class="lg:w-1/2 w-full">
+            <img src="./src/asset/coding.gif" alt="Tentang" class="w-full h-auto rounded-xl shadow-lg object-cover" />
+          </div>
+        </div>
+      </section>
+
+      <section id="projects" class="min-h-screen flex items-center justify-center p-6 scroll-mt-20">
+        <div class="max-w-6xl w-full">
+          <h2 class="text-3xl font-bold text-white text-center mb-10">
+            Proyek Saya
+          </h2>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Item Project -->
+            <div class="bg-gray-800 p-4 rounded-xl shadow-lg text-center animate-float">
+              <img src="./src/asset/project1.png" alt="Project 1" class="w-full h-40 object-cover rounded-md mb-4" />
+              <h3 class="text-xl font-semibold text-white mb-2">
+                Judul Proyek 1
+              </h3>
+              <p class="text-gray-300 text-sm mb-4">Nothing..</p>
+              <button class="text-white text-xl hover:scale-110 transition">
+                <i class="fa-solid fa-arrow-down"></i>
+              </button>
+            </div>
+
+            <div class="bg-gray-800 p-4 rounded-xl shadow-lg text-center animate-float delay-100">
+              <img src="./src/asset/project2.png" alt="Project 2" class="w-full h-40 object-cover rounded-md mb-4" />
+              <h3 class="text-xl font-semibold text-white mb-2">
+                Judul Proyek 2
+              </h3>
+              <p class="text-gray-300 text-sm mb-4">Nothing..</p>
+              <button class="text-white text-xl hover:scale-110 transition">
+                <i class="fa-solid fa-arrow-down"></i>
+              </button>
+            </div>
+
+            <div class="bg-gray-800 p-4 rounded-xl shadow-lg text-center animate-float delay-200">
+              <img src="./src/asset/project3.png" alt="Project 3" class="w-full h-40 object-cover rounded-md mb-4" />
+              <h3 class="text-xl font-semibold text-white mb-2">
+                Judul Proyek 3
+              </h3>
+              <p class="text-gray-300 text-sm mb-4">Nothing..</p>
+              <button class="text-white text-xl hover:scale-110 transition">
+                <i class="fa-solid fa-arrow-down"></i>
+              </button>
+            </div>
+
+            <div class="bg-gray-800 p-4 rounded-xl shadow-lg text-center animate-float delay-200">
+              <img src="./src/asset/project4.png" alt="Project 4" class="w-full h-40 object-cover rounded-md mb-4" />
+              <h3 class="text-xl font-semibold text-white mb-2">
+                Judul Proyek 4
+              </h3>
+              <p class="text-gray-300 text-sm mb-4">Nothing..</p>
+              <button class="text-white text-xl hover:scale-110 transition">
+                <i class="fa-solid fa-arrow-down"></i>
+              </button>
+            </div>
+            <div class="bg-gray-800 p-4 rounded-xl shadow-lg text-center animate-float delay-200">
+              <img src="./src/asset/project5.png" alt="Project 5" class="w-full h-40 object-cover rounded-md mb-4" />
+              <h3 class="text-xl font-semibold text-white mb-2">
+                Judul Proyek 5
+              </h3>
+              <p class="text-gray-300 text-sm mb-4">Nothing..</p>
+              <button class="text-white text-xl hover:scale-110 transition">
+                <i class="fa-solid fa-arrow-down"></i>
+              </button>
+            </div>
+
+            <div class="bg-gray-800 p-4 rounded-xl shadow-lg text-center animate-float delay-200">
+              <img src="./src/asset/project6.png" alt="Project 6" class="w-full h-40 object-cover rounded-md mb-4" />
+              <h3 class="text-xl font-semibold text-white mb-2">
+                Judul Proyek 6
+              </h3>
+              <p class="text-gray-300 text-sm mb-4">Nothing..</p>
+              <button class="text-white text-xl hover:scale-110 transition">
+                <i class="fa-solid fa-arrow-down"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="keahlian" class="min-h-screen flex items-center justify-center p-6 scroll-mt-20">
+        <div class="max-w-4xl w-full text-center">
+          <h2 class="text-3xl font-bold text-white mb-6">
+            Tools & Lingkungan yang Saya Gunakan
+          </h2>
+
+          <p class="text-gray-300 mb-8 text-base sm:text-lg leading-relaxed">
+            Selain belajar bahasa pemrograman dasar, saya juga terbiasa
+            menggunakan berbagai tools dan teknologi pendukung untuk
+            pengembangan aplikasi, bot, dan eksperimen game.
+          </p>
+
+          <div class="flex flex-wrap justify-center gap-8">
+            <!-- Icon HTML -->
+            <div class="text-center animate-heartbeat">
+              <i class="fa-brands fa-html5 text-orange-500 text-5xl mb-2"></i>
+              <div class="text-white text-sm">HTML</div>
+            </div>
+
+            <!-- Icon CSS -->
+            <div class="text-center animate-heartbeat delay-100">
+              <i class="fa-brands fa-css3-alt text-blue-500 text-5xl mb-2"></i>
+              <div class="text-white text-sm">CSS</div>
+            </div>
+
+            <!-- Icon JS -->
+            <div class="text-center animate-heartbeat delay-200">
+              <i class="fa-brands fa-js text-yellow-400 text-5xl mb-2"></i>
+              <div class="text-white text-sm">JavaScript</div>
+            </div>
+
+            <!-- Icon PHP -->
+            <div class="text-center animate-heartbeat delay-300">
+              <i class="fa-brands fa-php text-indigo-400 text-5xl mb-2"></i>
+              <div class="text-white text-sm">PHP</div>
+            </div>
+
+            <!-- Icon Laravel -->
+            <div class="text-center animate-heartbeat delay-400">
+              <i class="fa-brands fa-laravel text-red-500 text-5xl mb-2"></i>
+              <div class="text-white text-sm">Laravel</div>
+            </div>
+
+            <!-- GitHub -->
+            <div class="text-center animate-heartbeat">
+              <i class="fa-brands fa-github text-white text-5xl mb-2"></i>
+              <div class="text-white text-sm">GitHub</div>
+            </div>
+
+            <!-- Tailwind CSS -->
+            <div class="text-center animate-heartbeat delay-100">
+              <i class="fa-solid fa-wind text-sky-400 text-5xl mb-2"></i>
+              <div class="text-white text-sm">Tailwind</div>
+            </div>
+
+            <!-- Node.js -->
+            <div class="text-center animate-heartbeat delay-200">
+              <i class="fa-brands fa-node-js text-green-500 text-5xl mb-2"></i>
+              <div class="text-white text-sm">Node.js</div>
+            </div>
+
+            <!-- SQLite -->
+            <div class="text-center animate-heartbeat delay-300">
+              <i class="fa-solid fa-database text-indigo-400 text-5xl mb-2"></i>
+              <div class="text-white text-sm">SQLite</div>
+            </div>
+
+            <!-- Bot -->
+            <div class="text-center animate-heartbeat delay-400">
+              <i class="fa-solid fa-robot text-purple-400 text-5xl mb-2"></i>
+              <div class="text-white text-sm">Bot</div>
+            </div>
+
+            <!-- Termux -->
+            <div class="text-center animate-heartbeat delay-500">
+              <i class="fa-solid fa-terminal text-gray-300 text-5xl mb-2"></i>
+              <div class="text-white text-sm">Termux</div>
+            </div>
+
+            <!-- Max2D -->
+            <div class="text-center animate-heartbeat delay-600">
+              <i class="fa-solid fa-gamepad text-orange-400 text-5xl mb-2"></i>
+              <div class="text-white text-sm">Max2D</div>
+            </div>
+
+            <!-- VS Code -->
+            <div class="text-center animate-heartbeat delay-700">
+              <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/vscode/vscode-original.svg"
+                alt="VS Code" class="w-12 h-12 mx-auto mb-2" />
+              <div class="text-white text-sm">VS Code</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="kontak" class="min-h-screen flex items-center justify-center p-6 scroll-mt-20">
+        <div class="max-w-6xl w-full flex flex-col lg:flex-row items-center gap-10">
+          <!-- Kiri: Gambar dengan animasi shake -->
+          <div class="w-full lg:w-1/2 flex justify-center">
+            <img src="./src/asset/profile.png" alt="Foto Profil"
+              class="w-70 h-70 object-cover shadow-lg rounded-lg animate-shake-mood" />
+          </div>
+
+          <!-- Kanan: Form Kirim Pesan -->
+          <div class="w-full lg:w-1/2">
+            <h2 class="text-2xl font-bold text-white mb-4">
+              Kirim Pesan ke Email Saya
+            </h2>
+            <form action="https://formspree.io/f/yourformid" method="POST" class="space-y-4">
+              <input type="text" name="name" placeholder="Nama Anda" required
+                class="w-full px-4 py-2 bg-gray-800 border border-gray-600 rounded text-white focus:outline-none" />
+
+              <input type="email" name="email" placeholder="Email Anda" required
+                class="w-full px-4 py-2 bg-gray-800 border border-gray-600 rounded text-white focus:outline-none" />
+
+              <textarea name="message" placeholder="Tulis pesan..." rows="5" required
+                class="w-full px-4 py-2 bg-gray-800 border border-gray-600 rounded text-white focus:outline-none"></textarea>
+
+              <button type="submit"
+                class="px-6 py-2 rounded-xl border-2 border-white text-white bg-transparent hover:bg-white hover:text-gray-900 transition duration-300">
+                <i class="fa-solid fa-paper-plane mr-2"></i> Kirim Pesan
+              </button>
+            </form>
+          </div>
+        </div>
+      </section>
+
+      <footer class="text-white py-6">
+        <!-- Teks Melompat -->
+        <div class="text-center text-lg flex flex-wrap justify-center gap-1 mb-4">
+          <span class="animate-bounce-delay delay-0">©</span>
+          <span class="animate-bounce-delay delay-1">2025</span>
+          <span class="animate-bounce-delay delay-2">Kifly</span>
+          <span class="animate-bounce-delay delay-3">Juand.</span>
+          <span class="animate-bounce-delay delay-4">Dibuat</span>
+          <span class="animate-bounce-delay delay-5">dengan</span>
+          <span class="animate-bounce-delay delay-6">❤️</span>
+        </div>
+
+        <!-- Icon Sosial Media -->
+        <div class="flex justify-center gap-6 text-2xl">
+          <a href="https://wa.me/your_number" target="_blank" class="hover:text-green-400 transition">
+            <i class="fa-brands fa-whatsapp"></i>
+          </a>
+          <a href="https://t.me/your_username" target="_blank" class="hover:text-blue-400 transition">
+            <i class="fa-brands fa-telegram"></i>
+          </a>
+          <a href="https://github.com/your_username" target="_blank" class="hover:text-gray-300 transition">
+            <i class="fa-brands fa-github"></i>
+          </a>
+        </div>
+      </footer>
+
+
+    </main>
+  </div>
+
+  <script>
+    let timerInterval;
+    function klik() {
+      Swal.fire({
+        imageUrl: "./src/asset/ceng.jpeg",
+        imageHeight: 200,
+        imageAlt: "Cat Fuck",
+        title: "Fuckkk, wleeee..",
+        html: "Saya akan menutup dalam <b></b> milidetik.",
+        timer: 2000,
+        timerProgressBar: true,
+        didOpen: () => {
+          Swal.showLoading();
+          const timer = Swal.getPopup().querySelector("b");
+          timerInterval = setInterval(() => {
+            timer.textContent = `${Swal.getTimerLeft()}`;
+          }, 100);
+        },
+        willClose: () => {
+          clearInterval(timerInterval);
+        },
+      }).then((result) => {
+        /* Read more about handling dismissals below */
+        if (result.dismiss === Swal.DismissReason.timer) {
+          console.log("I was closed by the timer");
+        }
+      });
+    }
+  </script>
+</body>
+
+</html>
